@@ -276,6 +276,40 @@ mtext(bquote(italic(.(fig_title))), side=3, adj=0.1, line=-3, cex = 1.6)
 
 dev.off()
 
+##########
+# LINEAR png #
+##########
+png(paste0(args$output, "_smudgeplot.pdf"))
+
+# layout(matrix(c(2,4,1,3), 2, 2, byrow=T), c(3,1), c(1,3))
+layout(matrix(c(4, 2, 1, 3), 2, 2, byrow = T), c(3, 1), c(1, 3))
+# 1 smudge plot
+plot_alt(cov_tab, ylim, colour_ramp_log)
+if (cov > 0) {
+    plot_expected_haplotype_structure(cov, smudge_tab, T, xmax = 0.49)
+}
+
+
+# 4 legend
+plot_legend(max(cov_tab[, "freq"]), colour_ramp, F)
+
+### add annotation
+# print smudge sizes
+plot.new()
+if (cov > 0) {
+    legend("topleft", bty = "n", reduce_structure_representation(smudge_tab[, "structure"]), cex = 1.1)
+    legend("top", bty = "n", legend = round(smudge_tab[, 2], 2), cex = 1.1)
+    legend("bottomleft", bty = "n", legend = c(cov_string, error_string), cex = 1.1)
+} else {
+    legend("bottomleft", bty = "n", legend = error_string, cex = 1.1)
+}
+
+plot.new()
+mtext(bquote(italic(.(fig_title))), side = 3, adj = 0.1, line = -3, cex = 1.6)
+
+
+dev.off()
+
 ############
 # log plot #
 ############
@@ -309,3 +343,72 @@ plot.new()
 mtext(bquote(italic(.(fig_title))), side=3, adj=0.1, line=-3, cex = 1.6)
 
 dev.off()
+
+############
+# log plot png #
+############
+
+png(paste0(args$output, "_smudgeplot_log10.pdf"))
+
+layout(matrix(c(4, 2, 1, 3), 2, 2, byrow = T), c(3, 1), c(1, 3))
+# cov_tab[, 'freq'] <- log10(cov_tab[, 'freq'])
+# 1 smudge plot
+plot_alt(cov_tab, ylim, colour_ramp_log, log = T)
+
+if (cov > 0) {
+    plot_expected_haplotype_structure(cov, smudge_tab, T, xmax = 0.49)
+}
+
+# 4 legend
+plot_legend(max(cov_tab[, "freq"]), colour_ramp_log, T)
+
+# print smudge sizes
+plot.new()
+if (cov > 0) {
+    legend("topleft", bty = "n", reduce_structure_representation(smudge_tab[, "structure"]), cex = 1.1)
+    legend("top", bty = "n", legend = round(smudge_tab[, 2], 2), cex = 1.1)
+    legend("bottomleft", bty = "n", legend = c(cov_string, error_string), cex = 1.1)
+} else {
+    legend("bottomleft", bty = "n", legend = error_string, cex = 1.1)
+}
+
+
+plot.new()
+mtext(bquote(italic(.(fig_title))), side = 3, adj = 0.1, line = -3, cex = 1.6)
+
+dev.off()
+
+############
+# log plot PNG #
+############
+
+png(paste0(args$output, "_smudgeplot_log10.pdf"))
+
+layout(matrix(c(4, 2, 1, 3), 2, 2, byrow = T), c(3, 1), c(1, 3))
+# cov_tab[, 'freq'] <- log10(cov_tab[, 'freq'])
+# 1 smudge plot
+plot_alt(cov_tab, ylim, colour_ramp_log, log = T)
+
+if (cov > 0) {
+    plot_expected_haplotype_structure(cov, smudge_tab, T, xmax = 0.49)
+}
+
+# 4 legend
+plot_legend(max(cov_tab[, "freq"]), colour_ramp_log, T)
+
+# print smudge sizes
+plot.new()
+if (cov > 0) {
+    legend("topleft", bty = "n", reduce_structure_representation(smudge_tab[, "structure"]), cex = 1.1)
+    legend("top", bty = "n", legend = round(smudge_tab[, 2], 2), cex = 1.1)
+    legend("bottomleft", bty = "n", legend = c(cov_string, error_string), cex = 1.1)
+} else {
+    legend("bottomleft", bty = "n", legend = error_string, cex = 1.1)
+}
+
+
+plot.new()
+mtext(bquote(italic(.(fig_title))), side = 3, adj = 0.1, line = -3, cex = 1.6)
+
+dev.off()
+
